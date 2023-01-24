@@ -40,7 +40,6 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
-force-app/main/default/customMetadata/Chat_GPT_Key.MyKey.md-meta.xml
 force-app/main/default/customMetadata/GPT_Key.michaelholt91_gmail_com.md-meta.xml
 force-app/main/default/flexipages
 force-app/main/default/layouts
