@@ -1,0 +1,8 @@
+<template>
+    Hello
+    <template if:true={responses} for:each={responses} for:item="response">
+        Record:
+        {response.fields.MHolt__Response__c.value}
+
+    </template>
+</template>
