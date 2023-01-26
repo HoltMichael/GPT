@@ -1,0 +1,11 @@
+<template>
+    <div class="response">
+        <lightning-button-icon variant="border-filled" style="display: block;" icon-name={buttonIcon} size="xx-small" alternative-text="Toggle input prompt for this response" title="Toggle input prompt for this response" onclick={handleTogglePrompt}></lightning-button-icon>
+        <template if:true={showPrompt}>
+            <div class="slds-border_bottom">
+                <lightning-formatted-text value={prompt}></lightning-formatted-text>
+            </div>
+        </template>
+        <lightning-formatted-text value={text} ></lightning-formatted-text>
+    </div>
+</template>

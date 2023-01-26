@@ -1,8 +1,9 @@
 <template>
-    Hello
-    <template if:true={responses} for:each={responses} for:item="response">
-        Record:
-        {response.fields.MHolt__Response__c.value}
-
-    </template>
+    <lightning-card title="GPT Responses" icon-name="standard:bot">
+        <div class="slds-p-around_small">
+            <template if:true={responses} for:each={responses} for:item="response">
+                <c-gpt-response-item key={response.fields.id.value} text={response.fields.MHolt__Response__c.value} prompt={response.fields.MHolt__Input__c.value}></c-gpt-response-item> 
+            </template>
+        </div>
+    </lightning-card>
 </template>
