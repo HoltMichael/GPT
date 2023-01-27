@@ -6,7 +6,7 @@
     Class to allow custom metadata to be inserted. 
 */
 
-public class GPTUtils {
+public with sharing class GPTUtils {
     //https://beta.openai.com/docs/api-reference/completions
     public static final String ENDPOINT ='https://api.openai.com/v1/completions';
 

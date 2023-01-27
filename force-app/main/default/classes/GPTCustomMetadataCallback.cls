@@ -6,7 +6,7 @@
     Class to allow custom metadata to be inserted. 
 */
 
-public class GPTCustomMetadataCallback implements Metadata.DeployCallback {
+public with sharing class GPTCustomMetadataCallback implements Metadata.DeployCallback {
     public void handleResult(Metadata.DeployResult result,
                              Metadata.DeployCallbackContext context) {
         if (result.status == Metadata.DeployStatus.Succeeded) {
