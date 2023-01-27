@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Tokens__c</fullName>
+    <defaultValue>2048</defaultValue>
+    <description>The maximum number of tokens to generate in the completion.
+
+The token count of your prompt plus max_tokens cannot exceed the model&apos;s context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Max Tokens</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

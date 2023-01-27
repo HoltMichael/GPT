@@ -5,7 +5,8 @@
     <externalId>false</externalId>
     <label>Case</label>
     <referenceTo>Case</referenceTo>
-    <relationshipName>ChatGPT_Responses</relationshipName>
+    <relationshipLabel>GPT Responses</relationshipLabel>
+    <relationshipName>GPT_Responses</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

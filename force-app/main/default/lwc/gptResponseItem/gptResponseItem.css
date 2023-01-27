@@ -1,5 +1,6 @@
 .response {
     border-radius: 7px;
+    margin-bottom: 0.5rem;
     padding: 0.25rem 1rem 1rem 1rem;
     background-color: #e0eefd;
 }

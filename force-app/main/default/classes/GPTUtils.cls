@@ -1,10 +1,16 @@
+/*
+    GPTCustomMetadataCallback
+    Author: Michael Holt
+    Date: 27th Jan 2023
+
+    Class to allow custom metadata to be inserted. 
+*/
+
 public class GPTUtils {
     //https://beta.openai.com/docs/api-reference/completions
     public static final String ENDPOINT ='https://api.openai.com/v1/completions';
-    public static final Decimal TEMPERATURE = 0.6; //Randomness
-    public static final Decimal TOP_P = 1; //Probability Mass
-    public static final Integer MAX_TOKENS = 2048; //Maximum number of tokens to generate and return (includes count of prompt tokens as well)
-    
+
+
     /*
         getGPTResponseForCaseComments
         Creates a GPT record based on the response from GPT to a callout with case comment body
@@ -74,10 +80,12 @@ public class GPTUtils {
         Takes a String to be sent to the GPT APIs and returns the payload from the endpoint
     */
     public static String handleGPTRequest(String message){
-        GPT_Key__mdt key = [SELECT Key__c
-                                FROM GPT_Key__mdt][0];
+        GPT_Key__mdt key = [SELECT Key__c, Context_Words__c, Max_Tokens__c, Temperature__c, Top_P__c
+                                FROM GPT_Key__mdt
+                                WHERE DeveloperName = 'GPTkey'][0];
+            System.debug(key);
 
-            String body = '{"model": "text-davinci-003","prompt":"'+ message + '","temperature": ' + TEMPERATURE + ',"top_p": ' + TOP_P + ',"max_tokens":' + MAX_TOKENS + '}';
+            String body = '{"model": "text-davinci-003","prompt":"'+ key.MHolt__Context_Words__c  + ': ' + message + '","temperature": ' + key.MHolt__Temperature__c + ',"top_p": ' + key.MHolt__Top_P__c + ',"max_tokens":' + key.MHolt__Max_Tokens__c + '}';
             HttpRequest req = new HttpRequest();
             req.setMethod('POST');
             req.setEndpoint(ENDPOINT);

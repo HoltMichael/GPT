@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="GPT Configurator" icon-name="utility:settings">
+        <div class="slds-p-around_small">
+            <lightning-formatted-text value="Head over to the Open API API Keys Page to generate your API Key and paste below to use GPT for Cases. Add any additional context you'd like GPT to know with each message, such as your company name can also be added below and will be sent with each GPT request."></lightning-formatted-text>
+            <div style="display: block;" class="slds-p-bottom_large slds-p-top_small">
+                <lightning-button label="Find my API Key" onclick={handleFindKey}></lightning-button>
+            </div>
+
+            <lightning-formatted-text value="Set GPT values below. If key has been previously entered, it will be retained if left blank."></lightning-formatted-text>
+            <lightning-input label="API Key" placeholder="API Key" ></lightning-input>
+            <lightning-input value={words} label="Context Words" placeholder="Additional context to help GPT solve customer issues, eg. 'Salesforce'" ></lightning-input>
+            <lightning-input value={maxTokens} label="Max Tokens" placeholder="Max Tokens" ></lightning-input>
+            <lightning-input value={temperature} label="Temperature" placeholder="Temperature" ></lightning-input>
+            <lightning-input value={topP} label="Top P" placeholder="Top P" ></lightning-input>
+            <div class="slds-p-top_small">
+                <lightning-button variant="brand" label="Submit" onclick={handleClick} ></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

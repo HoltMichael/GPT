@@ -1,8 +1,9 @@
 <template>
     <div class="response">
         <lightning-button-icon variant="border-filled" style="display: block;" icon-name={buttonIcon} size="xx-small" alternative-text="Toggle input prompt for this response" title="Toggle input prompt for this response" onclick={handleTogglePrompt}></lightning-button-icon>
+        <!-- <lightning-button-icon variant="border-filled" style="display: block;" icon-name="utility:copy" size="xx-small" alternative-text="Copy" title="Copy" onclick={copyText}></lightning-button-icon> -->
         <template if:true={showPrompt}>
-            <div class="slds-border_bottom">
+            <div class="slds-border_bottom" style="border-color:white">
                 <lightning-formatted-text value={prompt}></lightning-formatted-text>
             </div>
         </template>

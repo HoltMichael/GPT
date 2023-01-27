@@ -11,7 +11,4 @@ export default class GptResponseItem extends LightningElement {
         this.showPrompt = !this.showPrompt;
         this.buttonIcon = this.buttonIcon == "utility:chevrondown" ? "utility:chevronup" : "utility:chevrondown";
     }
-
-
-
 }

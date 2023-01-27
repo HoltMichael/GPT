@@ -11,8 +11,6 @@ deploy-options.json
 # LWC VSCode autocomplete
 **/lwc/jsconfig.json
 
-**/customMetadata/Chat_GPT_Key.MyKey.md-meta.xml
-
 # LWC Jest coverage reports
 coverage/
 
@@ -40,8 +38,8 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
-force-app/main/default/customMetadata/GPT_Key.michaelholt91_gmail_com.md-meta.xml
 force-app/main/default/flexipages
 force-app/main/default/layouts
 force-app/main/default/objects/Case
 force-app/main/default/objectTranslations
+force-app/main/default/customMetadata/GPT_Key.key.md-meta.xml
