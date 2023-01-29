@@ -3,7 +3,7 @@
     Author: Michael Holt
     Date: 27th Jan 2023
 
-    Class to allow custom metadata to be inserted. 
+    Handles the updating of GPT_Key__mdt records and fields
 */
 
 public with sharing class GPTConfigurationUtils {

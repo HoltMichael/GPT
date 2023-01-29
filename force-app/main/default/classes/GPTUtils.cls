@@ -83,7 +83,6 @@ public with sharing class GPTUtils {
         GPT_Key__mdt key = [SELECT Key__c, Context_Words__c, Max_Tokens__c, Temperature__c, Top_P__c
                                 FROM GPT_Key__mdt
                                 WHERE DeveloperName = 'GPTkey'][0];
-            System.debug(key);
 
             String body = '{"model": "text-davinci-003","prompt":"'+ key.MHolt__Context_Words__c  + ': ' + message + '","temperature": ' + key.MHolt__Temperature__c + ',"top_p": ' + key.MHolt__Top_P__c + ',"max_tokens":' + key.MHolt__Max_Tokens__c + '}';
             HttpRequest req = new HttpRequest();
