@@ -1,7 +1,9 @@
 import { LightningElement, wire } from 'lwc';
 import save from '@salesforce/apex/GPTConfigurationUtils.saveGPTMetadata';
 import load from '@salesforce/apex/GPTConfigurationUtils.getGPTMetadata';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import hasAccess from '@salesforce/apex/GPTConfigurationUtils.checkUserHasAssignedPermissionSet';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 
 
 
@@ -11,6 +13,8 @@ export default class GptConfigurator extends LightningElement {
     temperature;
     topP;
 
+   @wire(hasAccess)userAccess;
+
     /*
         loadGPTMetadata
         Pull in the CMT data into the input fields, so users can see the current values
@@ -19,11 +23,11 @@ export default class GptConfigurator extends LightningElement {
     @wire(load)
     loadGPTMetadata({ error, data }) {
         if (data) {
-            console.log(data);
             this.words = data.MHolt__Context_Words__c;
             this.maxTokens = data.MHolt__Max_Tokens__c;
             this.temperature = data.MHolt__Temperature__c;
             this.topP = data.MHolt__Top_P__c
+            console.log(this.userAccess);
         } else if (error) {
             console.log('error');
             console.log(error);

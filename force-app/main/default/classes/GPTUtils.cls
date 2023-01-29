@@ -3,13 +3,30 @@
     Author: Michael Holt
     Date: 27th Jan 2023
 
-    Class to allow custom metadata to be inserted. 
+    Class to allow the creation of GPT_Response__c records. Creates records even if the user doesn't have permission to view them
+    as admins or other users may wish to see the GPT response records.
 */
 
 public with sharing class GPTUtils {
     //https://beta.openai.com/docs/api-reference/completions
     public static final String ENDPOINT ='https://api.openai.com/v1/completions';
 
+    /*
+        checkUserHasAssignedPermissionSet
+        Check that a user has permission to view GPT Responses. If not, render a no access screen.
+    */
+    @AuraEnabled(cacheable=true)
+    static public boolean checkUserHasAssignedPermissionSet(String userName) {
+        String uName = UserInfo.getUserName();
+        List<PermissionSetAssignment> GPT_UserPermForUser = [ SELECT Id 
+                                                                FROM PermissionSetAssignment 
+                                                                WHERE PermissionSetId IN ( SELECT Id 
+                                                                                            FROM PermissionSet 
+                                                                                            WHERE Name = :'GPT_User') AND AssigneeId IN (select Id from User where UserName = :uName) ];
+
+        System.debug(GPT_UserPermForUser.size() > 0);
+        return GPT_UserPermForUser.size() > 0;
+    }
 
     /*
         getGPTResponseForCaseComments
@@ -28,7 +45,6 @@ public with sharing class GPTUtils {
             GPT_Response__c res = new GPT_Response__c(Raw_Response__c = response, Response__c = parsedResponse, Case__c = cc.ParentId, Input__c = cc.CommentBody);
             gptResponses.add(res);
         }
-        
         insert gptResponses;
     }
 
@@ -97,4 +113,5 @@ public with sharing class GPTUtils {
 
             return response.getBody();
     }
+
 }

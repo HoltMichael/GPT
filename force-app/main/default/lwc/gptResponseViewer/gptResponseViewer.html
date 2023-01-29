@@ -4,10 +4,17 @@
             <c-gpt-logo class="slds-p-left_small"></c-gpt-logo>            
             <h2 class="slds-card__header-title slds-p-left_x-small">GPT Responses</h2>
         </header>
-        <div class="slds-p-around_small" >
-            <template if:true={responses} for:each={responses} for:item="response">
-                <c-gpt-response-item key={response.fields.id.value} text={response.fields.MHolt__Response__c.value} prompt={response.fields.MHolt__Input__c.value}></c-gpt-response-item> 
-            </template>
-        </div>
+        <template if:true={userAccess.data}>
+            <div class="slds-p-around_small" >
+                <template if:true={responses} for:each={responses} for:item="response">
+                    <c-gpt-response-item key={response.fields.id.value} text={response.fields.MHolt__Response__c.value} prompt={response.fields.MHolt__Input__c.value}></c-gpt-response-item> 
+                </template>
+            </div>
+        </template>
+        <template if:false={userAccess.data}>
+            <div class="slds-p-around_small" >
+                No access to GPT Responses.
+            </div>
+        </template>
     </lightning-card>
 </template>

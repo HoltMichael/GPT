@@ -8,6 +8,24 @@
 
 public with sharing class GPTConfigurationUtils {
 
+
+    /*
+        checkUserHasAssignedPermissionSet
+        Check that an admin has permission to view the configuration page. If not, render a no access screen.
+    */
+    @AuraEnabled(cacheable=true)
+    static public boolean checkUserHasAssignedPermissionSet(String userName) {
+        String uName = UserInfo.getUserName();
+        List<PermissionSetAssignment> GPT_AdminPermForUser = [ SELECT Id 
+                                                                FROM PermissionSetAssignment 
+                                                                WHERE PermissionSetId IN ( SELECT Id 
+                                                                                            FROM PermissionSet 
+                                                                                            WHERE Name = :'GPT_Admin') AND AssigneeId IN (select Id from User where UserName = :uName) ];
+
+        return GPT_AdminPermForUser.size() > 0;
+    }
+
+
     /*
         getGPTMetadata
         Gets the current GPT metadata values, but not the API key for security reasons

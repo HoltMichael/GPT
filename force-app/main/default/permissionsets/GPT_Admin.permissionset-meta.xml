@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>GPT_Key__mdt</name>
+    </customMetadataTypeAccesses>
+    <description>Gives access to the GPT Settings LWC and the permission to update GPT API key and other configuration details</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>GPT Admin</label>
+</PermissionSet>

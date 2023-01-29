@@ -1,11 +1,14 @@
 import { LightningElement, wire, api } from 'lwc';
 import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
+import hasAccess from '@salesforce/apex/GPTUtils.checkUserHasAssignedPermissionSet';
 
 
 export default class GptResponseViewer extends LightningElement {
     @api recordId;
     responses;
     error;
+    @wire(hasAccess)userAccess;
+
 
     @wire(getRelatedListRecords, {
         parentRecordId: '$recordId',
