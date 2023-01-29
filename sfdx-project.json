@@ -2,11 +2,26 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "GPT For Cases",
+      "versionName": "version 1",
+      "versionNumber": "1.3.3.NEXT",
+      "versionDescription": "",
+      "ancestorId": "04t1n0000028OJaAAM"
     }
   ],
   "name": "ChatGPT",
   "namespace": "MHolt",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "55.0"
+  "sourceApiVersion": "55.0",
+  "packageAliases": {
+    "GPT For Cases": "0Ho1n000000KylWCAS",
+    "GPT For Cases@1.0.0-1": "04t1n0000028OJGAA2",
+    "GPT For Cases@1.1.0-1": "04t1n0000028OJLAA2",
+    "GPT For Cases@1.2.0-1": "04t1n0000028OJQAA2",
+    "GPT For Cases@1.3.0-1": "04t1n0000028OJVAA2",
+    "GPT For Cases@1.3.1-1": "04t1n0000028OJaAAM",
+    "GPT For Cases@1.3.2-1": "04t1n0000028OJfAAM",
+    "GPT For Cases@1.3.3-1": "04t1n0000028OJkAAM"
+  }
 }

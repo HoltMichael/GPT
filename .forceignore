@@ -14,6 +14,6 @@ package.xml
 #Profiles
 **/profiles/**
 
-force-app/main/default/customMetadata/Chat_GPT_Key.MyKey.md-meta.xml
 force-app/main/default/objects/Case
 force-app/main/default/objectTranslations
+force-app/main/default/customMetadata/GPT_Key.key.md-meta.xml

@@ -9,7 +9,7 @@
 
                 <lightning-formatted-text value="Set GPT values below. If key has been previously entered, it will be retained if left blank."></lightning-formatted-text>
                 <lightning-input label="API Key" placeholder="API Key" ></lightning-input>
-                <lightning-input value={words} label="Context Words" placeholder="Additional context to help GPT solve customer issues, eg. 'Salesforce'" ></lightning-input>
+                <lightning-input value={words} maxlength="100" label="Context Words" placeholder="Additional context to help GPT, eg. 'Salesforce' or 'Pretend to be [company name]'" ></lightning-input>
                 <lightning-input value={maxTokens} label="Max Tokens" placeholder="Max Tokens" ></lightning-input>
                 <lightning-input value={temperature} label="Temperature" placeholder="Temperature" ></lightning-input>
                 <lightning-input value={topP} label="Top P" placeholder="Top P" ></lightning-input>

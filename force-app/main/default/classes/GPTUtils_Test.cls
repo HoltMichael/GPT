@@ -2,6 +2,46 @@
 public with sharing class GPTUtils_Test {
 
 
+
+    /*
+        checkUserHasAssignedPermissionSet_Test
+        Tests the check that the user has the GPT_User permission set 
+    */
+    @isTest
+    public static void checkUserHasAssignedPermissionSet_Test(){
+
+        // Create a new user
+        User u = new User();
+        u.Username = 'username' + (Math.round(Math.random() * (1000000 - 1)) + '@lksadj.com' );
+        u.Email = u.username;
+        u.TimeZoneSidKey = 'America/Los_Angeles';
+        u.LocaleSidKey = 'en_US';
+        u.EmailEncodingKey = 'UTF-8';
+        u.LanguageLocaleKey = 'en_US';
+        u.FirstName = 'firstName';
+        u.LastName = 'lastName';
+        u.alias = 'alias';
+
+        u.ProfileId = [SELECT Id FROM Profile WHERE Name='Standard User'].Id;
+        insert u;
+
+        System.RunAs(u){
+            System.assertEquals(false, GPTUtils.checkUserHasAssignedPermissionSet());
+        }
+
+        // Assign the GPT_User permission set to the user
+        PermissionSetAssignment psa = new PermissionSetAssignment();
+        psa.AssigneeId = u.Id;
+        psa.PermissionSetId = [SELECT Id FROM PermissionSet WHERE Name='GPT_User'].Id;
+        insert psa;
+
+        Test.startTest();
+            System.RunAs(u){
+                System.assertEquals(true, GPTUtils.checkUserHasAssignedPermissionSet());
+            }
+        Test.stopTest();
+    }
+
     /*
         insertCase_Test
         Test that when a case is created, a callout is made to GPT
@@ -35,6 +75,7 @@ public with sharing class GPTUtils_Test {
         Test.stopTest();
 
         List<MHolt__GPT_Response__c> gr = [SELECT id FROM MHolt__GPT_Response__c];
+        
         //2 GPT Responses will have been created, 1 for the case and 1 for the case comment
         System.assertEquals(2, gr.size());
     }
@@ -107,8 +148,12 @@ public with sharing class GPTUtils_Test {
         Test.startTest();
             String response = GPTUtils.handleGPTRequest(testMessage);
         Test.stopTest();
-        System.assertEquals('{"id":"cmpl-6cYIagtiL8GfocKxbu6DG2Cw8Algm","object":"text_completion","created":1674646328,"model":"text-davinci-003","choices":[{"text":"Test Response","index":0,"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":16,"completion_tokens":2,"total_tokens":18}}', response);
 
+        List<GPT_Key__mdt> keys = [SELECT Key__c, Context_Words__c, Max_Tokens__c, Temperature__c, Top_P__c
+                                    FROM GPT_Key__mdt
+                                    WHERE DeveloperName = 'GPTkey'];
+
+        System.assertEquals('{"id":"cmpl-6cYIagtiL8GfocKxbu6DG2Cw8Algm","object":"text_completion","created":1674646328,"model":"text-davinci-003","choices":[{"text":"Test Response","index":0,"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":16,"completion_tokens":2,"total_tokens":18}}', response);
     }
     
 

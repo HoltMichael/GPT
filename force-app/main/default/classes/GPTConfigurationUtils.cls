@@ -14,7 +14,7 @@ public with sharing class GPTConfigurationUtils {
         Check that an admin has permission to view the configuration page. If not, render a no access screen.
     */
     @AuraEnabled(cacheable=true)
-    static public boolean checkUserHasAssignedPermissionSet(String userName) {
+    static public boolean checkUserHasAssignedPermissionSet() {
         String uName = UserInfo.getUserName();
         List<PermissionSetAssignment> GPT_AdminPermForUser = [ SELECT Id 
                                                                 FROM PermissionSetAssignment 
@@ -32,9 +32,11 @@ public with sharing class GPTConfigurationUtils {
     */
     @AuraEnabled(cacheable=true)
     public static GPT_Key__mdt getGPTMetadata(){
-        return  ([SELECT MHolt__Context_Words__c, MHolt__Max_Tokens__c, MHolt__Temperature__c, MHolt__Top_P__c
-                    FROM GPT_Key__mdt
-                    WHERE DeveloperName = 'GPTkey'][0]);
+        List<GPT_Key__mdt> gptInfo = [SELECT MHolt__Context_Words__c, MHolt__Max_Tokens__c, MHolt__Temperature__c, MHolt__Top_P__c
+                        FROM GPT_Key__mdt
+                        WHERE DeveloperName = 'GPTkey'];
+        
+        return gptInfo.size() > 0 ?  gptInfo[0] : null;
     }    
 
     /*
@@ -49,15 +51,17 @@ public with sharing class GPTConfigurationUtils {
         
         //Update settings without having to remember the key every time
         if(key == '' || key == null){
-            GPT_Key__mdt GPTMetadata = [SELECT Key__c
+            List<GPT_Key__mdt> GPTMetadata = [SELECT Key__c
                                         FROM GPT_Key__mdt
                                         WHERE DeveloperName = 'GPTkey'];
-            key = GPTMetadata.Key__c;
+            if(GPTMetadata.size() > 0){
+                key = GPTMetadata[0].Key__c;
+            }
         }
 
         try{
             Metadata.CustomMetadata customMetadata =  new Metadata.CustomMetadata();
-            customMetadata.fullName = 'GPT_Key__mdt.'+'GPTkey';
+            customMetadata.fullName = 'MHolt__GPT_Key__mdt.'+'GPTkey';
             customMetadata.label = 'Key';
 
             Metadata.CustomMetadataValue keyField = new Metadata.CustomMetadataValue();
