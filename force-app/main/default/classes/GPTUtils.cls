@@ -94,6 +94,8 @@ public with sharing class GPTUtils {
     }
 
 
+    //TODO Need to sanitise input - quotes for example need to be preceeded by \
+
     /*
         handleGPTRequest
         Takes a String to be sent to the GPT APIs and returns the payload from the endpoint
@@ -102,6 +104,7 @@ public with sharing class GPTUtils {
         List<GPT_Key__mdt> keys = [SELECT Key__c, Context_Words__c, Max_Tokens__c, Temperature__c, Top_P__c
                                 FROM GPT_Key__mdt
                                 WHERE DeveloperName = 'GPTkey'];
+
 
             //CMT are test visible so if we have no CMTs in the org, the following code won't run in test context. Instead, allow the insertion of blank GPT_Response__c records only in test context
             if(keys.size() > 0 || Test.isRunningTest()){
