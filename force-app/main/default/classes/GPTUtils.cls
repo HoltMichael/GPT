@@ -104,14 +104,16 @@ public with sharing class GPTUtils {
         List<GPT_Key__mdt> keys = [SELECT Key__c, Context_Words__c, Max_Tokens__c, Temperature__c, Top_P__c
                                 FROM GPT_Key__mdt
                                 WHERE DeveloperName = 'GPTkey'];
-
-
+            //Sanitise double quotes
+            message = message.replace('"','\\"');
             //CMT are test visible so if we have no CMTs in the org, the following code won't run in test context. Instead, allow the insertion of blank GPT_Response__c records only in test context
             if(keys.size() > 0 || Test.isRunningTest()){
                 GPT_Key__mdt key = Test.isRunningTest() ? new GPT_Key__mdt() : keys[0];
                 String body = '{"model": "text-davinci-003","prompt":"'+ key.MHolt__Context_Words__c  + ': ' + message + '","temperature": ' + key.MHolt__Temperature__c + ',"top_p": ' + key.MHolt__Top_P__c + ',"max_tokens":' + key.MHolt__Max_Tokens__c + '}';
                 HttpRequest req = new HttpRequest();
                 req.setMethod('POST');
+                //Getting error - System.CalloutException: Read timed out, so increasing Timeout param
+                req.setTimeout(120000);
                 req.setEndpoint(ENDPOINT);
                 req.setHeader('Authorization', 'Bearer '+key.key__c);
                 req.setHeader('Content-Type', 'application/json;charset=UTF-8');
