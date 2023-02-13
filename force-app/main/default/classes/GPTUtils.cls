@@ -93,9 +93,6 @@ public with sharing class GPTUtils {
         return parsedResponse;
     }
 
-
-    //TODO Need to sanitise input - quotes for example need to be preceeded by \
-
     /*
         handleGPTRequest
         Takes a String to be sent to the GPT APIs and returns the payload from the endpoint
